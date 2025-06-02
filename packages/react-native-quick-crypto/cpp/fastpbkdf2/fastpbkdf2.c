@@ -17,10 +17,15 @@
 #include <assert.h>
 #include <string.h>
 #if defined(__GNUC__)
-  #if TARGET_OS_MACCATALYST
-    #include <machine/endian.h>  // Mac Catalyst
-  #else  
-    #include <endian.h>          // iOS
+  #if defined(__APPLE__)
+    #include <TargetConditionals.h>
+    #if TARGET_OS_MACCATALYST
+      #include <machine/endian.h>
+    #else
+      #include <endian.h>
+    #endif
+  #else
+    #include <endian.h>
   #endif
 #endif
 
